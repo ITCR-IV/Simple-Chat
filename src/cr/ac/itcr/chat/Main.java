@@ -1,21 +1,15 @@
 package cr.ac.itcr.chat;
 
+import cr.ac.itcr.chat.GUI.application;
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.event.ActionEvent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Main{
 
     public static void main(String[] args) {
-        launch(args);
+//        connector c = new connector();
+//        c.initiate();
+        Application.launch(application.class,args);
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-
-    }
 }
+
