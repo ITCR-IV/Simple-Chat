@@ -8,4 +8,12 @@ public class contact {
         this.ip = ip;
         this.port = port;
     }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public String getPort() {
+        return port;
+    }
 }

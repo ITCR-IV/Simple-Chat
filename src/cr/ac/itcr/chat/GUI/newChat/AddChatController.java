@@ -13,15 +13,18 @@ public class AddChatController {
     @FXML private TextField IPBox;
     @FXML private TextField PortBox;
     private AppFxmlController parentController;
-    private Stage stage = (Stage) cancelButton.getScene().getWindow();
+
 
     public void cancelButtonAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
     public void OKButtonAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
         contact newContact = new contact(IPBox.getText(), PortBox.getText());
-        stage.getOwner();
+        parentController.add_contact(newContact);
+        stage.close();
     }
 
     public void setParentController(AppFxmlController parentController) {
