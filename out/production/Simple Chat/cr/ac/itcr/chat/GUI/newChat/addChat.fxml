@@ -4,12 +4,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.itcr.chat.GUI.newChat.AddChat">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.itcr.chat.GUI.newChat.AddChatController">
    <children>
-      <Button layoutX="14.0" layoutY="110.0" mnemonicParsing="false" text="Cancel" fx:id="closeButton" onAction="#closeButtonAction" />
-      <Button layoutX="203.0" layoutY="110.0" mnemonicParsing="false" text="OK" />
-      <TextField layoutX="51.0" layoutY="14.0" prefHeight="26.0" prefWidth="185.0" />
-      <TextField layoutX="50.0" layoutY="62.0" prefHeight="26.0" prefWidth="186.0" />
+      <Button layoutX="14.0" layoutY="110.0" mnemonicParsing="false" text="Cancel" fx:id="cancelButton" onAction="#cancelButtonAction" />
+      <Button layoutX="203.0" layoutY="110.0" mnemonicParsing="false" text="OK" fx:id="OKButton" onAction="#OKButtonAction" />
+      <TextField layoutX="50.0" layoutY="14.0" prefHeight="26.0" prefWidth="185.0" fx:id="IPBox"/>
+      <TextField layoutX="50.0" layoutY="62.0" prefHeight="26.0" prefWidth="185.0" fx:id="PortBox"/>
       <Text layoutX="32.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IP:">
          <font>
             <Font size="14.0" />

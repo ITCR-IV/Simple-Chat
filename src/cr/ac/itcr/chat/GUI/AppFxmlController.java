@@ -12,7 +12,7 @@ public class AppFxmlController {
 
     @FXML
     private void open_new_chat_selector(ActionEvent event) throws Exception {
-        addChatWindow window = new addChatWindow();
+        addChatWindow window = new addChatWindow(this);
     }
 
     public void send_msg(ActionEvent actionEvent) {
