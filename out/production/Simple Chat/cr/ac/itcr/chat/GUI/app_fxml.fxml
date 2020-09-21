@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.itcr.chat.GUI.AppFxml">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+      <children>
+            <ListView layoutY="30.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="570.0" prefWidth="200.0" />
+            <TextField alignment="TOP_LEFT" layoutX="211.0" layoutY="487.0" prefHeight="98.0" prefWidth="500.0" />
+            <Button layoutX="718.0" layoutY="487.0" mnemonicParsing="false" onAction="#send_msg" prefHeight="98.0" prefWidth="68.0" text="SEND">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#open_new_chat_selector" prefHeight="30.0" prefWidth="200.0" text="New Chat" textOverrun="CLIP" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edf1f5" height="480.0" layoutX="200.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0" />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
