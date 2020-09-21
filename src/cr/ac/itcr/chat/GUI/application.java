@@ -11,10 +11,12 @@ public class application extends Application{
 
     private Window window;
 
+    //What to do before application starts
     @Override
     public void init() throws Exception {
         System.out.println("Before");
     }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -29,11 +31,13 @@ public class application extends Application{
         primaryStage.show();
     }
 
+    //What to do when application closes
     @Override
     public void stop() throws Exception {
         System.out.println("After");
     }
 
+    //This is so the addChatWindow can find this parent window and set it as owner
     public Window getStage(){
         return window;
     }

@@ -9,21 +9,24 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AddChatController {
+    //fxml file elements
     @FXML private Button cancelButton;
     @FXML private TextField IPBox;
     @FXML private TextField PortBox;
+
+    //parent controller
     private AppFxmlController parentController;
 
 
     public void cancelButtonAction(ActionEvent actionEvent) {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        Stage stage = (Stage) cancelButton.getScene().getWindow(); //get the stage
         stage.close();
     }
 
     public void OKButtonAction(ActionEvent actionEvent) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
-        contact newContact = new contact(IPBox.getText(), PortBox.getText());
-        parentController.add_contact(newContact);
+        contact newContact = new contact(IPBox.getText(), PortBox.getText()); //generate new contact object
+        parentController.add_contact(newContact); //pass it to parent controller
         stage.close();
     }
 

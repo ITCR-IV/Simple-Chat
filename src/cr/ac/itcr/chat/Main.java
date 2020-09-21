@@ -8,7 +8,7 @@ public class Main{
     public static void main(String[] args) {
 //        connector c = new connector();
 //        c.initiate();
-        Application.launch(application.class,args);
+        Application.launch(application.class,args); //Start main application window
     }
 
 }
