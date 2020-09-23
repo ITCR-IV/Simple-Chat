@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class application extends Application{
-
+    // TODO: 9/20/2020 add label where chat msgs are going to be displayed 
     private Window window;
 
     //What to do before application starts

@@ -20,7 +20,7 @@ public class AppFxmlController {
 
     //When Send button is pressed
     public void send_msg(ActionEvent actionEvent) {
-        System.out.println("Sending msg:" + MsgBox.getText());
+        System.out.println("Sending msg:" + MsgBox.getText()); // TODO: 9/20/2020 send msgs through socket and then display in chat 
     }
 
     //Method called by child controller when OK button is pressed
