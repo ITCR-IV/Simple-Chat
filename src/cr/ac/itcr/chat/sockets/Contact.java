@@ -1,11 +1,11 @@
-package cr.ac.itcr.chat.GUI;
+package cr.ac.itcr.chat.sockets;
 
-public class contact {
+public class Contact {
     private String ip;
     private String port;
 
     // TODO: 9/20/2020 add ip/port validation maybe? 
-    public contact(String ip, String port) {
+    public Contact(String ip, String port) {
         this.ip = ip;
         this.port = port;
     }

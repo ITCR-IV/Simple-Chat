@@ -1,13 +1,10 @@
 package cr.ac.itcr.chat.GUI;
 
+import cr.ac.itcr.chat.sockets.Contact;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import cr.ac.itcr.chat.GUI.newChat.addChatWindow;
-import cr.ac.itcr.chat.GUI.contact;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 public class AppFxmlController {
 
@@ -20,11 +17,11 @@ public class AppFxmlController {
 
     //When Send button is pressed
     public void send_msg(ActionEvent actionEvent) {
-        System.out.println("Sending msg:" + MsgBox.getText()); // TODO: 9/20/2020 send msgs through socket and then display in chat 
+        System.out.println("Sending msg:" + MsgBox.getText()); // :TODO: 9/20/2020 send msgs through socket and then display in chat
     }
 
     //Method called by child controller when OK button is pressed
-    public void add_contact(contact contact){
+    public void add_contact(Contact contact){
         System.out.println("IP: "+ contact.getIp());
         System.out.println("Port:"+contact.getPort());
     }
