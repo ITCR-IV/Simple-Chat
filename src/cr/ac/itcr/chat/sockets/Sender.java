@@ -8,14 +8,15 @@ public class Sender {
     private Socket s;
     private DataOutputStream dos;
 
-    public Sender(int PORT) {
+    public Sender(Contact contact) {
         try {
-            s = new Socket("127.0.0.1", PORT);
+            s = new Socket(contact.getIp(), contact.getPort());
             DataOutputStream dos = new DataOutputStream(s.getOutputStream());
 
 
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Failed to connect to given ip/port combination");
         }
     }
 

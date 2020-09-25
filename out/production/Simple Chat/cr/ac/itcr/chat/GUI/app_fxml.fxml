@@ -29,8 +29,8 @@
                         textOverrun="CLIP"/>
                 <Rectangle fill="#ffffff" height="35.0" layoutX="675.0" stroke="TRANSPARENT" strokeType="INSIDE"
                            width="125.0"/>
-                <Label fx:id="CurrentSession" layoutX="675.0" prefHeight="35.0" prefWidth="135.0"
-                       text="Current Session:" textAlignment="RIGHT"/>
+                <Label fx:id="CurrentSession" layoutX="675.0" prefHeight="35.0" prefWidth="125.0"
+                       text="Current Session:" textAlignment="CENTER"/>
                 <Line endY="35" layoutX="675" startY="0"/>
                 <Line endX="800" layoutY="35" startX="675"/>
             </children>

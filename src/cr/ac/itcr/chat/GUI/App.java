@@ -3,6 +3,7 @@ package cr.ac.itcr.chat.GUI;
 import cr.ac.itcr.chat.sockets.ChatMessage;
 import cr.ac.itcr.chat.sockets.Contact;
 import cr.ac.itcr.chat.sockets.Receiver;
+import cr.ac.itcr.chat.sockets.Sender;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,6 +20,7 @@ public class App extends Application {
     // TODO: 9/20/2020 add label where chat msgs are going to be displayed 
     private Window window;
     public static Map<Contact, List<ChatMessage>> messagesDB = new HashMap<>(); //To store contacts + their msgs
+    public static Map<Contact, Sender> sendersDB = new HashMap<>(); //To store contacts + their msgs
     public static Receiver receiver; //Creates the receiver for the current instance
     public static Contact user; //quick access to the current user
 

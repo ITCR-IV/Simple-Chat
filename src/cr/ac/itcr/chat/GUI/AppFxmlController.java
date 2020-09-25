@@ -2,10 +2,13 @@ package cr.ac.itcr.chat.GUI;
 
 import cr.ac.itcr.chat.GUI.newChat.addChatWindow;
 import cr.ac.itcr.chat.sockets.Contact;
+import cr.ac.itcr.chat.sockets.Sender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
+import java.util.ArrayList;
 
 public class AppFxmlController {
 
@@ -16,7 +19,7 @@ public class AppFxmlController {
 
     @FXML //When New Chat button is pressed
     private void open_new_chat_selector(ActionEvent event) throws Exception {
-        addChatWindow window = new addChatWindow(this); //Passes itself as parameter so that later it can tell the controller who's its parent controller
+        addChatWindow window = new addChatWindow(); //Passes itself as parameter so that later it can tell the controller who's its parent controller
     }
 
     //When Send button is pressed
@@ -29,8 +32,11 @@ public class AppFxmlController {
     }
 
     //Method called by child controller when OK button is pressed
-    public void add_contact(Contact contact) {
+    public static void add_contact(Contact contact) {
         System.out.println("IP: " + contact.getIp());
         System.out.println("Port:" + contact.getPort());
+        Sender newSender = new Sender(contact);
+        App.messagesDB.put(contact, new ArrayList<>());
+        App.sendersDB.put(contact, newSender);
     }
 }

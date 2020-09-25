@@ -1,6 +1,5 @@
 package cr.ac.itcr.chat.GUI.newChat;
 
-import cr.ac.itcr.chat.GUI.AppFxmlController;
 import cr.ac.itcr.chat.GUI.App;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +9,7 @@ import javafx.stage.Stage;
 
 public class addChatWindow extends App {
 
-    public addChatWindow(AppFxmlController parentController) throws Exception {
+    public addChatWindow() throws Exception {
         //setup stage
         Stage stage = new Stage();
         stage.initOwner(getStage());
@@ -22,7 +21,6 @@ public class addChatWindow extends App {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("addChat.fxml"));
         Parent root = loader.load();
         AddChatController controller = loader.getController();
-        controller.setParentController(parentController);
 
         //setup scene
         Scene scene = new Scene(root, 250, 150);//setup the scene
