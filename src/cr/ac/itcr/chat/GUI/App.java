@@ -3,7 +3,6 @@ package cr.ac.itcr.chat.GUI;
 import cr.ac.itcr.chat.sockets.ChatMessage;
 import cr.ac.itcr.chat.sockets.Contact;
 import cr.ac.itcr.chat.sockets.Receiver;
-import cr.ac.itcr.chat.sockets.Sender;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,7 +20,6 @@ public class App extends Application {
     // TODO: 9/20/2020 add label where chat msgs are going to be displayed 
     private Window window;
     public static Map<Contact, List<ChatMessage>> messagesDB = new HashMap<>(); //To store contacts + their msgs
-    public static Map<Contact, Sender> sendersDB = new HashMap<>(); //To store contacts + their msgs
     public static Receiver receiver; //Creates the receiver for the current instance
     public static Contact user; //quick access to the current user
     private static AppFxmlController controller;
@@ -62,12 +60,12 @@ public class App extends Application {
         return window;
     }
 
-    //Method called by child controller when OK button is pressed
+    //Method to add a contact to the messagesDB and the App's listview, is here to easily reference the controller
     public static void add_contact(Contact contact) {
-        Sender newSender = new Sender(contact);
-        App.messagesDB.put(contact, new ArrayList<>());
-        App.sendersDB.put(contact, newSender);
-        controller.getContactsDisplay().getItems().add(contact);
+        if (Contact.serverExists(contact)) {
+            App.messagesDB.put(contact, new ArrayList<>());
+            controller.getContactsDisplay().getItems().add(contact);
+        }
     }
 
 }

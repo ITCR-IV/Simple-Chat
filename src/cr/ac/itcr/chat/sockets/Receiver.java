@@ -13,23 +13,23 @@ public class Receiver implements Runnable {
     private ServerSocket ss;
 
     public Receiver() {
-        Thread t = new Thread(this);
+        Thread t = new Thread(this); //thread so that it's permanently checking for sockets
         t.start();
     }
 
     @Override
     public void run() {
-        try (ServerSocket server = new ServerSocket(0)) {
+        try (ServerSocket server = new ServerSocket(0)) {  //this try automatically closes the server socket when done
             this.ss = server;
             while (true) {
-                Socket s = ss.accept();
-                DataInputStream dis = new DataInputStream(s.getInputStream());
-                String incomingMsg = dis.readUTF();
-                s.close();
+                Socket s = ss.accept(); //waits for client socket to connect
+                DataInputStream dis = new DataInputStream(s.getInputStream()); // input stream
+                String incomingMsg = dis.readUTF(); // reads the incoming msg
+                s.close(); //closes the socket
 
                 Contact newContact = new Contact(s.getInetAddress(), s.getPort());
-                App.add_contact(newContact);
-                System.out.println(App.sendersDB);
+                if (!App.messagesDB.containsKey(newContact))
+                    App.add_contact(newContact); //Adds the contact to the DB
             }
         } catch (IOException e) {
             e.printStackTrace();
