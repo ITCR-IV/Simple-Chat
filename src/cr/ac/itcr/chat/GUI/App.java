@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class App extends Application {
     private Window window;
-    public static Map<Contact, List<ChatMessage>> messagesDB = new HashMap<>(); //To store contacts + their msgs
+    public static Map<String, List<ChatMessage>> messagesDB = new HashMap<>(); //To store contacts + their msgs
     public static Receiver receiver; //Creates the receiver for the current instance
     public static Contact user; //quick access to the current user
     private static AppFxmlController controller;
@@ -51,7 +51,7 @@ public class App extends Application {
     //What to do when application closes
     @Override
     public void stop() throws Exception {
-        System.out.println("After");
+        receiver.terminate();
     }
 
     //This is so the addChatWindow can find this parent window and set it as owner
@@ -60,12 +60,18 @@ public class App extends Application {
     }
 
     //Method to add a contact to the messagesDB and the App's listview, is here to easily reference the controller
-    public static void add_contact(Contact contact) {
+    public static void addContact(Contact contact) {
         // TODO: 9/25/2020 make it so you can't add yourself
-        if (!App.messagesDB.containsKey(contact)) { // TODO: 9/25/2020 this always returns true, debug it so it won't add duplicates
-            App.messagesDB.put(contact, new ArrayList<>());
+        String key = contact.getContactInfo();
+        if (!messagesDB.containsKey(key)) {
+            messagesDB.put(key, new ArrayList<>());
             controller.getContactsDisplay().getItems().add(contact);
         }
+    }
+
+    public static void addMessage(Contact contact, ChatMessage msg) {
+        messagesDB.get(contact.getContactInfo()).add(msg);
+        int i = 4;
     }
 
 }

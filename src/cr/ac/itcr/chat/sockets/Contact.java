@@ -24,6 +24,10 @@ public class Contact {
         return port;
     }
 
+    public String getContactInfo() {
+        return (ip.getHostAddress() + ":" + Integer.toString(port));
+    }
+
     @Override
     public String toString() {
         return ("IP: " + ip.getHostAddress() + "\n" + "Port: " + Integer.toString(port));
@@ -33,7 +37,9 @@ public class Contact {
         try {
             Socket s = new Socket(this.getIp(), this.getPort());
             DataOutputStream dos = new DataOutputStream(s.getOutputStream());
-            dos.writeUTF(msg.toString());
+            // TODO: 9/25/2020 Add Date and Time to msgs
+            // TODO: 9/25/2020 Check if server is still available and if not display some error and delete from contacts
+            dos.writeUTF(msg.getSender().getContactInfo() + "-" + msg.getPayload());
             dos.close();
 
         } catch (UnknownHostException e) {
