@@ -1,5 +1,7 @@
 package cr.ac.itcr.chat.sockets;
 
+import cr.ac.itcr.chat.GUI.App;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -19,23 +21,19 @@ public class Receiver implements Runnable {
     public void run() {
         try (ServerSocket server = new ServerSocket(0)) {
             this.ss = server;
-            Socket s = ss.accept();
-            DataInputStream dis = new DataInputStream(s.getInputStream());
-            String incomingMsg = dis.readUTF();
-            s.close();
+            while (true) {
+                Socket s = ss.accept();
+                DataInputStream dis = new DataInputStream(s.getInputStream());
+                String incomingMsg = dis.readUTF();
+                s.close();
+
+                Contact newContact = new Contact(s.getInetAddress(), s.getPort());
+                App.add_contact(newContact);
+                System.out.println(App.sendersDB);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //while (true) {
-
-
-//                Contact newContact = new Contact(s.getInetAddress(), s.getPort());
-//                App.sendersDB.put(newContact, new Sender(newContact));
-
-
-//                System.out.println(App.sendersDB);
-
-        //}
     }
 
     public InetAddress getIP() {

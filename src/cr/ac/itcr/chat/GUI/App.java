@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ public class App extends Application {
     public static Map<Contact, Sender> sendersDB = new HashMap<>(); //To store contacts + their msgs
     public static Receiver receiver; //Creates the receiver for the current instance
     public static Contact user; //quick access to the current user
+    private static AppFxmlController controller;
 
     //What to do before application starts
     @Override
@@ -41,7 +43,7 @@ public class App extends Application {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("app_fxml.fxml")); //Group node that is root
         Parent root = loader.load();
-        AppFxmlController controller = loader.getController();
+        controller = loader.getController();
         controller.update_info();
 
         Scene scene = new Scene(root, 800, 600);//setup the scene
@@ -58,6 +60,14 @@ public class App extends Application {
     //This is so the addChatWindow can find this parent window and set it as owner
     public Window getStage() {
         return window;
+    }
+
+    //Method called by child controller when OK button is pressed
+    public static void add_contact(Contact contact) {
+        Sender newSender = new Sender(contact);
+        App.messagesDB.put(contact, new ArrayList<>());
+        App.sendersDB.put(contact, newSender);
+        controller.getContactsDisplay().getItems().add(contact);
     }
 
 }
