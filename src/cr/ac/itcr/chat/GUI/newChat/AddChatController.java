@@ -29,6 +29,7 @@ public class AddChatController {
     public void OKButtonAction(ActionEvent actionEvent) throws UnknownHostException {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         // TODO: 9/24/2020 Add port and ip verification
+        // TODO: 9/25/2020 Check for empty fields
         Contact newContact = new Contact(InetAddress.getByName(IPBox.getText()), Integer.parseInt(PortBox.getText())); //generate new contact object
         if (Contact.serverExists(newContact)) {
             App.addContact(newContact); //pass it to parent controller}

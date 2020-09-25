@@ -4,6 +4,8 @@ import cr.ac.itcr.chat.sockets.ChatMessage;
 import cr.ac.itcr.chat.sockets.Contact;
 import cr.ac.itcr.chat.sockets.Receiver;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,24 +13,41 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.net.InetAddress;
-import java.util.ArrayList;
+import java.net.UnknownHostException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class App extends Application {
     private Window window;
-    public static Map<String, List<ChatMessage>> messagesDB = new HashMap<>(); //To store contacts + their msgs
-    public static Receiver receiver; //Creates the receiver for the current instance
-    public static Contact user; //quick access to the current user
+
+    private static Map<String, ObservableList<ChatMessage>> messagesDB = new HashMap<>(); //To store contacts + their msgs
+    private static Receiver receiver; //Creates the receiver for the current instance
+    private static Contact user; //quick access to the current user
     private static AppFxmlController controller;
+
+    public static Map<String, ObservableList<ChatMessage>> getMessagesDB() {
+        return messagesDB;
+    }
+
+    public static void setMessagesDB(Map<String, ObservableList<ChatMessage>> messagesDB) {
+        App.messagesDB = messagesDB;
+    }
+
+    public static Receiver getReceiver() {
+        return receiver;
+    }
+
+    public static Contact getUser() {
+        return user;
+    }
 
     //What to do before application starts
     @Override
 
     public void init() throws Exception {
         receiver = new Receiver();
-        user = new Contact(InetAddress.getLocalHost(), receiver.getPort());
+        user = new Contact(InetAddress.getLocalHost(), getReceiver().getPort());
     }
 
 
@@ -51,7 +70,7 @@ public class App extends Application {
     //What to do when application closes
     @Override
     public void stop() throws Exception {
-        receiver.terminate();
+        getReceiver().terminate();
     }
 
     //This is so the addChatWindow can find this parent window and set it as owner
@@ -60,18 +79,29 @@ public class App extends Application {
     }
 
     //Method to add a contact to the messagesDB and the App's listview, is here to easily reference the controller
-    public static void addContact(Contact contact) {
+    public static void addContact(Contact contact) throws UnknownHostException {
         // TODO: 9/25/2020 make it so you can't add yourself
-        String key = contact.getContactInfo();
-        if (!messagesDB.containsKey(key)) {
-            messagesDB.put(key, new ArrayList<>());
+        String key;
+
+        //Validación de si ingresa ip de misma máquina que lo agrege como localhost
+        if (contact.getIp().getHostAddress().equals(App.getUser().getIp().getHostAddress())) {
+            key = new Contact(InetAddress.getByName("localhost"), contact.getPort()).getContactInfo();
+        } else {
+            key = contact.getContactInfo();
+        }
+
+        if (!getMessagesDB().containsKey(key)) {
+            getMessagesDB().put(key, FXCollections.observableArrayList());
             controller.getContactsDisplay().getItems().add(contact);
         }
     }
 
     public static void addMessage(Contact contact, ChatMessage msg) {
         // TODO: 9/25/2020 Add validation for msgs (not empty or whatevs)
-        messagesDB.get(contact.getContactInfo()).add(msg);
+        Map<String, ObservableList<ChatMessage>> map = getMessagesDB();
+        ObservableList<ChatMessage> list = map.get(contact.getContactInfo());
+        list.add(msg);
+        setMessagesDB(map);
     }
 
 }

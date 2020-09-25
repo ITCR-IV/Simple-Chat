@@ -3,16 +3,12 @@ package cr.ac.itcr.chat.GUI;
 import cr.ac.itcr.chat.GUI.newChat.addChatWindow;
 import cr.ac.itcr.chat.sockets.ChatMessage;
 import cr.ac.itcr.chat.sockets.Contact;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-
-import java.util.List;
 
 public class AppFxmlController {
 
@@ -32,7 +28,7 @@ public class AppFxmlController {
 
     //When Send button is pressed
     public void send_msg(ActionEvent actionEvent) {
-        ChatMessage msg = new ChatMessage(App.user, msgBox.getText());
+        ChatMessage msg = new ChatMessage(App.getUser(), msgBox.getText());
         Contact contact = contactsDisplay.getSelectionModel().getSelectedItem();
         if (contact != null) {
             contact.sendMessage(msg);
@@ -41,7 +37,7 @@ public class AppFxmlController {
 
 
     public void update_info() {
-        CurrentSession.setText("Current Session:\n" + App.user.getIp().getHostAddress() + ": " + Integer.toString(App.user.getPort()));
+        CurrentSession.setText("Current Session:\n" + App.getUser().getIp().getHostAddress() + ": " + Integer.toString(App.getUser().getPort()));
     }
 
     public ListView getContactsDisplay() {
@@ -52,9 +48,7 @@ public class AppFxmlController {
     public void clickedContacts(MouseEvent mouseEvent) {
         Contact contact = contactsDisplay.getSelectionModel().getSelectedItem();
         if (contact != null) {
-            List<ChatMessage> messagesList = App.messagesDB.get(contact.getContactInfo());
-            ObservableList<ChatMessage> messagesObsList = FXCollections.observableArrayList(messagesList);
-            msgList.setItems(messagesObsList); // TODO: 9/25/2020 FIX BUG AND MAKE THE LISTVIEW DISPLAY THE MSGS ONCE AND FOR ALL
+            msgList.setItems(App.getMessagesDB().get(contact.getContactInfo())); // TODO: 9/25/2020 FIX BUG AND MAKE THE LISTVIEW DISPLAY THE MSGS ONCE AND FOR ALL
             //Display messages
         }
     }

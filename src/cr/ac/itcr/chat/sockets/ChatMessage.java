@@ -22,7 +22,7 @@ public class ChatMessage {
 
     @Override
     public String toString() {
-        if (sender.getContactInfo() == App.user.getContactInfo()) {
+        if (sender.getIp().getHostAddress().equals(App.getUser().getIp().getHostAddress())) {
             return ("You: " + payload);
         } else {
             return (sender.getIp().getHostAddress() + ":" + Integer.toString(sender.getPort()) + ": " + payload);

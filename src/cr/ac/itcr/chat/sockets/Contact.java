@@ -37,14 +37,19 @@ public class Contact {
 
     public void sendMessage(ChatMessage msg) {
         try {
-            Socket s = new Socket(this.getIp(), this.getPort());
-            DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+            Socket s = new Socket(this.getIp(), this.getPort()); //open socket
+            DataOutputStream dos = new DataOutputStream(s.getOutputStream()); //open data stream
             // TODO: 9/25/2020 Add Date and Time to msgs
             // TODO: 9/25/2020 Check if server is still available and if not display some error and delete from contacts
-            dos.writeUTF(msg.getSender().getContactInfo() + "-" + msg.getPayload());
-            dos.close();
+            if (ip.getHostAddress().equals(InetAddress.getByName("localhost").getHostAddress()) || ip.getHostAddress().equals(App.getUser().getIp().getHostAddress())) { //in case sending msgs in same machine have the contact info be sent with ip localhost
+                dos.writeUTF(InetAddress.getByName("localhost").getHostAddress() + ":" + Integer.toString(msg.getSender().getPort()) + "-" + msg.getPayload()); //Send the msg
+            } else {
+                dos.writeUTF(msg.getSender().getContactInfo() + "-" + msg.getPayload()); //Send the msg
+            }
 
-            App.addMessage(this, msg);
+            dos.close(); //close data stream + socket
+
+            App.addMessage(this, msg); //Add msg to DB
 
         } catch (UnknownHostException e) {
             e.printStackTrace();
