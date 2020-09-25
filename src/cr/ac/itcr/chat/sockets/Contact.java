@@ -19,4 +19,9 @@ public class Contact {
     public int getPort() {
         return port;
     }
+
+    @Override
+    public String toString() {
+        return ("IP: " + ip.getHostAddress() + "\n" + "Port: " + Integer.toString(port));
+    }
 }
