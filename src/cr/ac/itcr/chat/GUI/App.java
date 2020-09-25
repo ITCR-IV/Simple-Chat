@@ -1,5 +1,8 @@
 package cr.ac.itcr.chat.GUI;
 
+import cr.ac.itcr.chat.sockets.ChatMessage;
+import cr.ac.itcr.chat.sockets.Contact;
+import cr.ac.itcr.chat.sockets.Receiver;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,20 +10,29 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class App extends Application{
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class App extends Application {
     // TODO: 9/20/2020 add label where chat msgs are going to be displayed 
     private Window window;
+    public static Map<Contact, List<ChatMessage>> messageDB = new HashMap<>(); //To store contacts + their msgs
+    public static Receiver receiver; //Creates the receiver for the current instance
+    public static Contact user; //quick access to the current user
 
     //What to do before application starts
     @Override
+
     public void init() throws Exception {
-        System.out.println("Before");
+        receiver = new Receiver();
+        user = new Contact(receiver.getIP(), receiver.getPort());
     }
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        window=primaryStage;
+    public void start(Stage primaryStage) throws Exception {
+        window = primaryStage;
         primaryStage.setTitle("Simple Chat");
         primaryStage.setResizable(false);
 
@@ -38,7 +50,7 @@ public class App extends Application{
     }
 
     //This is so the addChatWindow can find this parent window and set it as owner
-    public Window getStage(){
+    public Window getStage() {
         return window;
     }
 

@@ -1,14 +1,23 @@
 package cr.ac.itcr.chat.GUI;
 
+import cr.ac.itcr.chat.GUI.newChat.addChatWindow;
 import cr.ac.itcr.chat.sockets.Contact;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import cr.ac.itcr.chat.GUI.newChat.addChatWindow;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class AppFxmlController {
 
-    @FXML private TextField MsgBox;
+    @FXML
+    private Label CurrentSession;
+    @FXML
+    private TextField MsgBox;
+
+    public AppFxmlController() {
+        CurrentSession.setText("Current Session: " + App.user.getIp().getHostAddress() + ":" + Integer.toString(App.user.getPort()));
+    }
+
 
     @FXML //When New Chat button is pressed
     private void open_new_chat_selector(ActionEvent event) throws Exception {
@@ -21,8 +30,8 @@ public class AppFxmlController {
     }
 
     //Method called by child controller when OK button is pressed
-    public void add_contact(Contact contact){
-        System.out.println("IP: "+ contact.getIp());
-        System.out.println("Port:"+contact.getPort());
+    public void add_contact(Contact contact) {
+        System.out.println("IP: " + contact.getIp());
+        System.out.println("Port:" + contact.getPort());
     }
 }

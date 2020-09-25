@@ -5,16 +5,25 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class Sender {
-    static private int PORT=50000;
+    private Socket s;
+    private DataOutputStream dos;
 
-    public static void main(String[] args) {
-            try {
-                Socket s = new Socket("127.0.0.1", 50000);
+    public Sender(int PORT) {
+        try {
+            s = new Socket("127.0.0.1", PORT);
+            DataOutputStream dos = new DataOutputStream(s.getOutputStream());
 
-                DataOutputStream dos = new DataOutputStream(s.getOutputStream());
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Socket getSocket() {
+        return s;
+    }
+
+    public DataOutputStream getDataOutputStream() {
+        return dos;
     }
 }

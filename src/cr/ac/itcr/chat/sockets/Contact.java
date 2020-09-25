@@ -1,20 +1,22 @@
 package cr.ac.itcr.chat.sockets;
 
+import java.net.InetAddress;
+
 public class Contact {
-    private String ip;
-    private String port;
+    private InetAddress ip;
+    private int port;
 
     // TODO: 9/20/2020 add ip/port validation maybe? 
-    public Contact(String ip, String port) {
+    public Contact(InetAddress ip, int port) {
         this.ip = ip;
         this.port = port;
     }
 
-    public String getIp() {
+    public InetAddress getIp() {
         return ip;
     }
 
-    public String getPort() {
+    public int getPort() {
         return port;
     }
 }
