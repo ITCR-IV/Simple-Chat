@@ -1,5 +1,7 @@
 package cr.ac.itcr.chat.sockets;
 
+import cr.ac.itcr.chat.GUI.App;
+
 public class ChatMessage {
 
     private Contact sender;
@@ -16,6 +18,15 @@ public class ChatMessage {
 
     public String getPayload() {
         return this.payload;
+    }
+
+    @Override
+    public String toString() {
+        if (sender == App.user) {
+            return ("You: " + payload);
+        } else {
+            return (sender.getIp().getHostAddress() + ":" + Integer.toString(sender.getPort()) + ": " + payload);
+        }
     }
 }
 

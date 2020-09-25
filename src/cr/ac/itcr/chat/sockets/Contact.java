@@ -29,11 +29,11 @@ public class Contact {
         return ("IP: " + ip.getHostAddress() + "\n" + "Port: " + Integer.toString(port));
     }
 
-    public void sendMessage(String msg) {
+    public void sendMessage(ChatMessage msg) {
         try {
             Socket s = new Socket(this.getIp(), this.getPort());
             DataOutputStream dos = new DataOutputStream(s.getOutputStream());
-            dos.writeUTF(msg);
+            dos.writeUTF(msg.toString());
             dos.close();
 
         } catch (UnknownHostException e) {

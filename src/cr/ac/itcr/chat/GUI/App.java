@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 public class App extends Application {
-    // TODO: 9/20/2020 add label where chat msgs are going to be displayed 
     private Window window;
     public static Map<Contact, List<ChatMessage>> messagesDB = new HashMap<>(); //To store contacts + their msgs
     public static Receiver receiver; //Creates the receiver for the current instance
@@ -62,7 +61,8 @@ public class App extends Application {
 
     //Method to add a contact to the messagesDB and the App's listview, is here to easily reference the controller
     public static void add_contact(Contact contact) {
-        if (Contact.serverExists(contact)) {
+        // TODO: 9/25/2020 make it so you can't add yourself
+        if (!App.messagesDB.containsKey(contact)) { // TODO: 9/25/2020 this always returns true, debug it so it won't add duplicates
             App.messagesDB.put(contact, new ArrayList<>());
             controller.getContactsDisplay().getItems().add(contact);
         }

@@ -23,13 +23,15 @@ public class Receiver implements Runnable {
             this.ss = server;
             while (true) {
                 Socket s = ss.accept(); //waits for client socket to connect
-                DataInputStream dis = new DataInputStream(s.getInputStream()); // input stream
-                String incomingMsg = dis.readUTF(); // reads the incoming msg
-                s.close(); //closes the socket
-
-                Contact newContact = new Contact(s.getInetAddress(), s.getPort());
-                if (!App.messagesDB.containsKey(newContact))
+                try {
+                    DataInputStream dis = new DataInputStream(s.getInputStream()); // input stream
+                    String incomingMsg = dis.readUTF(); // reads the incoming msg
+                    Contact newContact = new Contact(s.getInetAddress(), s.getPort());
                     App.add_contact(newContact); //Adds the contact to the DB
+                } catch (IOException e) {
+                    System.out.println("No msg was received");
+                }
+                s.close(); //closes the socket
             }
         } catch (IOException e) {
             e.printStackTrace();
