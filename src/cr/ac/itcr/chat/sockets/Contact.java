@@ -1,5 +1,7 @@
 package cr.ac.itcr.chat.sockets;
 
+import cr.ac.itcr.chat.GUI.App;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -41,6 +43,8 @@ public class Contact {
             // TODO: 9/25/2020 Check if server is still available and if not display some error and delete from contacts
             dos.writeUTF(msg.getSender().getContactInfo() + "-" + msg.getPayload());
             dos.close();
+
+            App.addMessage(this, msg);
 
         } catch (UnknownHostException e) {
             e.printStackTrace();

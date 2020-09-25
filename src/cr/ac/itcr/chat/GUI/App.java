@@ -70,8 +70,8 @@ public class App extends Application {
     }
 
     public static void addMessage(Contact contact, ChatMessage msg) {
+        // TODO: 9/25/2020 Add validation for msgs (not empty or whatevs)
         messagesDB.get(contact.getContactInfo()).add(msg);
-        int i = 4;
     }
 
 }

@@ -54,7 +54,7 @@ public class AppFxmlController {
         if (contact != null) {
             List<ChatMessage> messagesList = App.messagesDB.get(contact.getContactInfo());
             ObservableList<ChatMessage> messagesObsList = FXCollections.observableArrayList(messagesList);
-            msgList = new ListView<ChatMessage>(messagesObsList); // TODO: 9/25/2020 FIX BUG AND MAKE THE LISTVIEW DISPLAY THE MSGS ONCE AND FOR ALL
+            msgList.setItems(messagesObsList); // TODO: 9/25/2020 FIX BUG AND MAKE THE LISTVIEW DISPLAY THE MSGS ONCE AND FOR ALL
             //Display messages
         }
     }
