@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ import java.util.Map;
 public class App extends Application {
     // TODO: 9/20/2020 add label where chat msgs are going to be displayed 
     private Window window;
-    public static Map<Contact, List<ChatMessage>> messageDB = new HashMap<>(); //To store contacts + their msgs
+    public static Map<Contact, List<ChatMessage>> messagesDB = new HashMap<>(); //To store contacts + their msgs
     public static Receiver receiver; //Creates the receiver for the current instance
     public static Contact user; //quick access to the current user
 
@@ -26,7 +27,7 @@ public class App extends Application {
 
     public void init() throws Exception {
         receiver = new Receiver();
-        user = new Contact(receiver.getIP(), receiver.getPort());
+        user = new Contact(InetAddress.getLocalHost(), receiver.getPort());
     }
 
 
@@ -36,7 +37,10 @@ public class App extends Application {
         primaryStage.setTitle("Simple Chat");
         primaryStage.setResizable(false);
 
-        Parent root = FXMLLoader.load(getClass().getResource("app_fxml.fxml"));//Group node that is root
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("app_fxml.fxml")); //Group node that is root
+        Parent root = loader.load();
+        AppFxmlController controller = loader.getController();
+        controller.update_info();
 
         Scene scene = new Scene(root, 800, 600);//setup the scene
         primaryStage.setScene(scene);

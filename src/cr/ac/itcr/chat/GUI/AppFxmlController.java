@@ -14,11 +14,6 @@ public class AppFxmlController {
     @FXML
     private TextField MsgBox;
 
-    public AppFxmlController() {
-        CurrentSession.setText("Current Session: " + App.user.getIp().getHostAddress() + ":" + Integer.toString(App.user.getPort()));
-    }
-
-
     @FXML //When New Chat button is pressed
     private void open_new_chat_selector(ActionEvent event) throws Exception {
         addChatWindow window = new addChatWindow(this); //Passes itself as parameter so that later it can tell the controller who's its parent controller
@@ -27,6 +22,10 @@ public class AppFxmlController {
     //When Send button is pressed
     public void send_msg(ActionEvent actionEvent) {
         System.out.println("Sending msg:" + MsgBox.getText()); // :TODO: 9/20/2020 send msgs through socket and then display in chat
+    }
+
+    public void update_info() {
+        CurrentSession.setText("Current Session:\n" + App.user.getIp().getHostAddress() + ":" + Integer.toString(App.user.getPort()));
     }
 
     //Method called by child controller when OK button is pressed
