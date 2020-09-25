@@ -26,6 +26,7 @@ public class Receiver implements Runnable {
                 try {
                     DataInputStream dis = new DataInputStream(s.getInputStream()); // input stream
                     String incomingMsg = dis.readUTF(); // reads the incoming msg
+                    System.out.println(incomingMsg);
                     Contact newContact = new Contact(s.getInetAddress(), s.getPort());
                     App.add_contact(newContact); //Adds the contact to the DB
                 } catch (IOException e) {
