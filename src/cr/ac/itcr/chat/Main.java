@@ -3,6 +3,11 @@ package cr.ac.itcr.chat;
 import cr.ac.itcr.chat.GUI.App;
 import javafx.application.Application;
 
+/**
+ * Main class simply launches the App class
+ *
+ * @Author Ignacio Vargas
+ */
 public class Main {
 
     public static void main(String[] args) {

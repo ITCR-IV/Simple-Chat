@@ -10,23 +10,40 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 
+
+/**
+ * Class that controls the server socket and runs the thread to check for incoming sockets
+ */
 public class Receiver implements Runnable {
+
 
     private ServerSocket ss;
 
     private boolean flag = true;
 
+    /**
+     * Closes the server socket and finishes the thread
+     *
+     * @throws IOException
+     */
     public void terminate() throws IOException {
         this.flag = false;
         ss.close();
     }
 
+    /**
+     * Class constructor
+     */
     public Receiver() {
         Thread t = new Thread(this); //thread so that it's permanently checking for sockets
         t.start();
     }
 
+
     @Override
+    /**
+     * Thread logic, waits for socket connection and decodes message and adds it to the messagesDB hashmap and adds teh contact if not added yet
+     */
     public void run() {
         try (ServerSocket server = new ServerSocket(0)) {  //this try automatically closes the server socket when done
             this.ss = server;
@@ -60,6 +77,9 @@ public class Receiver implements Runnable {
         }
     }
 
+    /**
+     * @return Server socket's port
+     */
     public int getPort() {
         return ss.getLocalPort();
     }

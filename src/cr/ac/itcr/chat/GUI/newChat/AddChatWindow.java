@@ -7,8 +7,16 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Class that controls the window that pops up when adding a new contact
+ */
 public class AddChatWindow extends App {
 
+    /**
+     * Class constructor
+     *
+     * @throws Exception
+     */
     public AddChatWindow() throws Exception {
         //setup stage
         Stage stage = new Stage();

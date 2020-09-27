@@ -17,6 +17,9 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * App class is the main class of the applicationv
+ */
 @SuppressWarnings("SpellCheckingInspection")
 public class App extends Application {
     private Window window;
@@ -30,27 +33,32 @@ public class App extends Application {
         return messagesDB;
     }
 
-    public static void setMessagesDB(Map<String, ObservableList<ChatMessage>> messagesDB) {
-        App.messagesDB = messagesDB;
-    }
-
+    /**
+     * @return dfgdf
+     */
     public static Receiver getReceiver() {
         return receiver;
     }
 
+    /**
+     * @return The ip and port of the user
+     */
     public static Contact getUser() {
         return user;
     }
 
-    //What to do before application starts
+    /**
+     * What to do before application starts
+     */
     @Override
-
     public void init() throws Exception {
         receiver = new Receiver();
         user = new Contact(InetAddress.getLocalHost(), getReceiver().getPort());
     }
 
-
+    /**
+     * Main thread when application's running
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
@@ -67,18 +75,29 @@ public class App extends Application {
         primaryStage.show();
     }
 
-    //What to do when application closes
+    /**
+     * What to do when application closes
+     */
     @Override
     public void stop() throws Exception {
         getReceiver().terminate();
     }
 
-    //This is so the addChatWindow can find this parent window and set it as owner
+    /**
+     * This is so the addChatWindow can find this parent window and set it as owner
+     *
+     * @return The main stage
+     */
     public Window getStage() {
         return window;
     }
 
-    //Method to add a contact to the messagesDB and the App's listview, is here to easily reference the controller
+    /**
+     * Method to add a contact to the messagesDB and the App's listview, is here to easily reference the controller
+     *
+     * @param contact
+     * @throws UnknownHostException
+     */
     public static void addContact(Contact contact) throws UnknownHostException {
         // TODO: 9/25/2020 make it so you can't add yourself
         String key;
@@ -96,6 +115,12 @@ public class App extends Application {
         }
     }
 
+    /**
+     * Adds a message to the messages hashmap in the conversation with the contact passed as a parameter
+     *
+     * @param contact
+     * @param msg
+     */
     public static void addMessage(Contact contact, ChatMessage msg) {
         // TODO: 9/25/2020 Add validation for msgs (not empty or whatevs)
         getMessagesDB().get(contact.getContactInfo()).add(msg);

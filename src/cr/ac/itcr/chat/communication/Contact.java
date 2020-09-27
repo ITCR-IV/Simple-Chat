@@ -8,33 +8,62 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+/**
+ * Class stores the ip and port of the contact and has related methods
+ */
 public class Contact {
     private InetAddress ip;
     private int port;
 
-    // TODO: 9/20/2020 add ip/port validation maybe? 
+    // TODO: 9/20/2020 add ip/port validation maybe?
+
+    /**
+     * Class constructor
+     *
+     * @param ip
+     * @param port
+     */
     public Contact(InetAddress ip, int port) {
         this.ip = ip;
         this.port = port;
     }
 
+    /**
+     * @return ip
+     */
     public InetAddress getIp() {
         return ip;
     }
 
+    /**
+     * @return port
+     */
     public int getPort() {
         return port;
     }
 
+    /**
+     * @return String formatted as "ip:port"
+     */
     public String getContactInfo() {
         return (ip.getHostAddress() + ":" + port);
     }
 
+    /**
+     * Overrides the toString method of this class for listview purposes
+     *
+     * @return "IP: @ip\nPort: @port"
+     */
     @Override
     public String toString() {
         return ("IP: " + ip.getHostAddress() + "\n" + "Port: " + port);
     }
 
+    /**
+     * opens up a socket and sends a message to the contact object's address
+     *
+     * @param msg
+     */
     public void sendMessage(ChatMessage msg) {
         try {
             Socket s = new Socket(this.getIp(), this.getPort()); //open socket
@@ -59,6 +88,12 @@ public class Contact {
         }
     }
 
+    /**
+     * Opens up a socket to check if the socket server exists but sends no message
+     *
+     * @param contact
+     * @return boolean
+     */
     public static boolean serverExists(Contact contact) {
         try {
             Socket s = new Socket(contact.getIp(), contact.getPort());
