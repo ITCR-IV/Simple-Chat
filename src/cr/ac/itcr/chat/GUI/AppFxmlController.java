@@ -1,8 +1,8 @@
 package cr.ac.itcr.chat.GUI;
 
-import cr.ac.itcr.chat.GUI.newChat.addChatWindow;
-import cr.ac.itcr.chat.sockets.ChatMessage;
-import cr.ac.itcr.chat.sockets.Contact;
+import cr.ac.itcr.chat.GUI.newChat.AddChatWindow;
+import cr.ac.itcr.chat.communication.ChatMessage;
+import cr.ac.itcr.chat.communication.Contact;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -23,7 +23,7 @@ public class AppFxmlController {
 
     @FXML //When New Chat button is pressed
     private void open_new_chat_selector(ActionEvent event) throws Exception {
-        addChatWindow window = new addChatWindow();
+        AddChatWindow window = new AddChatWindow();
     }
 
     //When Send button is pressed
@@ -37,7 +37,7 @@ public class AppFxmlController {
 
 
     public void update_info() {
-        CurrentSession.setText("Current Session:\n" + App.getUser().getIp().getHostAddress() + ": " + Integer.toString(App.getUser().getPort()));
+        CurrentSession.setText("Current Session:\n" + App.getUser().getIp().getHostAddress() + ": " + App.getUser().getPort());
     }
 
     public ListView getContactsDisplay() {
@@ -48,7 +48,7 @@ public class AppFxmlController {
     public void clickedContacts(MouseEvent mouseEvent) {
         Contact contact = contactsDisplay.getSelectionModel().getSelectedItem();
         if (contact != null) {
-            msgList.setItems(App.getMessagesDB().get(contact.getContactInfo())); // TODO: 9/25/2020 FIX BUG AND MAKE THE LISTVIEW DISPLAY THE MSGS ONCE AND FOR ALL
+            msgList.setItems(App.getMessagesDB().get(contact.getContactInfo()));
             //Display messages
         }
     }

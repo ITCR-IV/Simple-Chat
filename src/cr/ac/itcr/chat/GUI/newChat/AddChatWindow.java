@@ -7,9 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class addChatWindow extends App {
+public class AddChatWindow extends App {
 
-    public addChatWindow() throws Exception {
+    public AddChatWindow() throws Exception {
         //setup stage
         Stage stage = new Stage();
         stage.initOwner(getStage());

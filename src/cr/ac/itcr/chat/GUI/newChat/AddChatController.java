@@ -1,7 +1,7 @@
 package cr.ac.itcr.chat.GUI.newChat;
 
 import cr.ac.itcr.chat.GUI.App;
-import cr.ac.itcr.chat.sockets.Contact;
+import cr.ac.itcr.chat.communication.Contact;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

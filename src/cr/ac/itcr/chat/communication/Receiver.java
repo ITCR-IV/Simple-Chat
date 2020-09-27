@@ -1,6 +1,7 @@
-package cr.ac.itcr.chat.sockets;
+package cr.ac.itcr.chat.communication;
 
 import cr.ac.itcr.chat.GUI.App;
+import javafx.application.Platform;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -41,8 +42,12 @@ public class Receiver implements Runnable {
 
                     String messagePayload = incomingMsg.split("-", 2)[1];
                     ChatMessage objectMsg = new ChatMessage(sender, messagePayload);
-                    App.addMessage(sender, objectMsg);
-
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            App.addMessage(sender, objectMsg);
+                        }
+                    });
                 } catch (IOException e) {
                     System.out.println("No msg was received");
                 }

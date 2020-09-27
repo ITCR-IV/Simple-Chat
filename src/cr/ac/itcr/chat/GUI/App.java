@@ -1,8 +1,8 @@
 package cr.ac.itcr.chat.GUI;
 
-import cr.ac.itcr.chat.sockets.ChatMessage;
-import cr.ac.itcr.chat.sockets.Contact;
-import cr.ac.itcr.chat.sockets.Receiver;
+import cr.ac.itcr.chat.communication.ChatMessage;
+import cr.ac.itcr.chat.communication.Contact;
+import cr.ac.itcr.chat.communication.Receiver;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -98,10 +98,8 @@ public class App extends Application {
 
     public static void addMessage(Contact contact, ChatMessage msg) {
         // TODO: 9/25/2020 Add validation for msgs (not empty or whatevs)
-        Map<String, ObservableList<ChatMessage>> map = getMessagesDB();
-        ObservableList<ChatMessage> list = map.get(contact.getContactInfo());
-        list.add(msg);
-        setMessagesDB(map);
+        getMessagesDB().get(contact.getContactInfo()).add(msg);
+        // TODO: 9/25/2020 fix bug where if called from thread it throws exception for not being the javafx thread
     }
 
 }

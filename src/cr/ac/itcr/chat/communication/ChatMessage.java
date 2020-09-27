@@ -1,4 +1,4 @@
-package cr.ac.itcr.chat.sockets;
+package cr.ac.itcr.chat.communication;
 
 import cr.ac.itcr.chat.GUI.App;
 
@@ -25,7 +25,7 @@ public class ChatMessage {
         if (sender.getIp().getHostAddress().equals(App.getUser().getIp().getHostAddress())) {
             return ("You: " + payload);
         } else {
-            return (sender.getIp().getHostAddress() + ":" + Integer.toString(sender.getPort()) + ": " + payload);
+            return (sender.getIp().getHostAddress() + ":" + sender.getPort() + ": " + payload);
         }
     }
 }

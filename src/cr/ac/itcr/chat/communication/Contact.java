@@ -1,4 +1,4 @@
-package cr.ac.itcr.chat.sockets;
+package cr.ac.itcr.chat.communication;
 
 import cr.ac.itcr.chat.GUI.App;
 
@@ -27,12 +27,12 @@ public class Contact {
     }
 
     public String getContactInfo() {
-        return (ip.getHostAddress() + ":" + Integer.toString(port));
+        return (ip.getHostAddress() + ":" + port);
     }
 
     @Override
     public String toString() {
-        return ("IP: " + ip.getHostAddress() + "\n" + "Port: " + Integer.toString(port));
+        return ("IP: " + ip.getHostAddress() + "\n" + "Port: " + port);
     }
 
     public void sendMessage(ChatMessage msg) {
@@ -42,7 +42,7 @@ public class Contact {
             // TODO: 9/25/2020 Add Date and Time to msgs
             // TODO: 9/25/2020 Check if server is still available and if not display some error and delete from contacts
             if (ip.getHostAddress().equals(InetAddress.getByName("localhost").getHostAddress()) || ip.getHostAddress().equals(App.getUser().getIp().getHostAddress())) { //in case sending msgs in same machine have the contact info be sent with ip localhost
-                dos.writeUTF(InetAddress.getByName("localhost").getHostAddress() + ":" + Integer.toString(msg.getSender().getPort()) + "-" + msg.getPayload()); //Send the msg
+                dos.writeUTF(InetAddress.getByName("localhost").getHostAddress() + ":" + msg.getSender().getPort() + "-" + msg.getPayload()); //Send the msg
             } else {
                 dos.writeUTF(msg.getSender().getContactInfo() + "-" + msg.getPayload()); //Send the msg
             }
