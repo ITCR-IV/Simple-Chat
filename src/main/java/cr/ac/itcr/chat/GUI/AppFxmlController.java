@@ -25,6 +25,7 @@ public class AppFxmlController {
     private Label CurrentSession;
     @FXML
     private TextField msgBox;
+    
 
     /**
      * Event when New Chat button is pressed

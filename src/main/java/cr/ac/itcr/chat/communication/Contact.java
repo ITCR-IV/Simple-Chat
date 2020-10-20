@@ -83,10 +83,15 @@ public class Contact {
             App.addMessage(this, msg); //Add msg to DB
 
         } catch (UnknownHostException e) {
+            log.error("{}", e.getMessage(), e);
+            e.printStackTrace();
             e.printStackTrace();
         } catch (IOException e) {
-            log.error("Failed to connect to given ip/port combination", e);
-            System.out.println("Failed to connect to given ip/port combination");
+            log.error("Failed to send message to contact", e);
+            System.out.println("Failed to send message to contact");
+            System.out.println(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            log.error("Illegal value for port (out of range)", e);
             System.out.println(e.getMessage());
         }
     }
@@ -109,6 +114,10 @@ public class Contact {
         } catch (IOException e) {
             log.error("Failed to connect to given ip/port combination", e);
             System.out.println("Failed to connect to given ip/port combination");
+            System.out.println(e.getMessage());
+            return false;
+        } catch (IllegalArgumentException e) {
+            log.error("Illegal value for port (out of range)", e);
             System.out.println(e.getMessage());
             return false;
         }

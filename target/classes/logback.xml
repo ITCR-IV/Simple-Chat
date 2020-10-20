@@ -2,7 +2,7 @@
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>errors.log</file>
-        <append>true</append>
+        <append>false</append>
         <immediateFlush>true</immediateFlush>
         <!-- encoders are assigned the type
              ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->

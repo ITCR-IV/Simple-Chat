@@ -2,6 +2,8 @@ package cr.ac.itcr.chat.communication;
 
 import cr.ac.itcr.chat.GUI.App;
 import javafx.application.Platform;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -16,7 +18,7 @@ import java.net.SocketException;
  */
 public class Receiver implements Runnable {
 
-
+    private static final Logger log = LoggerFactory.getLogger(Receiver.class);
     private ServerSocket ss;
 
     private boolean flag = true;
@@ -71,8 +73,14 @@ public class Receiver implements Runnable {
                 s.close(); //closes the socket
             }
         } catch (SocketException e) {
-            System.out.println("Interrupted server socket accept ");
+            if (!flag) {
+                System.out.println("Interrupted server socket accept");
+            } else {
+                log.error("Interrupted server socket accept", e);
+                e.printStackTrace();
+            }
         } catch (IOException e) {
+            log.error("IOException error in server socket thread", e);
             e.printStackTrace();
         }
     }
