@@ -24,7 +24,7 @@ import java.util.Map;
 public class App extends Application {
     private Window window;
 
-    private static Map<String, ObservableList<ChatMessage>> messagesDB = new HashMap<>(); //To store contacts + their msgs
+    private static final Map<String, ObservableList<ChatMessage>> messagesDB = new HashMap<String, ObservableList<ChatMessage>>(); //To store contacts + their msgs
     private static Receiver receiver; //Creates the receiver for the current instance
     private static Contact user; //quick access to the current user
     private static AppFxmlController controller;
@@ -110,7 +110,7 @@ public class App extends Application {
         }
 
         if (!getMessagesDB().containsKey(key)) {
-            getMessagesDB().put(key, FXCollections.observableArrayList());
+            getMessagesDB().put(key, FXCollections.<ChatMessage>observableArrayList());
             controller.getContactsDisplay().getItems().add(contact);
         }
     }
@@ -124,7 +124,6 @@ public class App extends Application {
     public static void addMessage(Contact contact, ChatMessage msg) {
         // TODO: 9/25/2020 Add validation for msgs (not empty or whatevs)
         getMessagesDB().get(contact.getContactInfo()).add(msg);
-        // TODO: 9/25/2020 fix bug where if called from thread it throws exception for not being the javafx thread
     }
 
 }

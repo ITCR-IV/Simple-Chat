@@ -6,7 +6,7 @@ import javafx.application.Application;
 /**
  * Main class simply launches the App class
  *
- * @Author Ignacio Vargas
+ * @author Ignacio Vargas
  */
 public class Main {
 
