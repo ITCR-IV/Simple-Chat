@@ -65,7 +65,7 @@ public class App extends Application {
         primaryStage.setTitle("Simple Chat");
         primaryStage.setResizable(false);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("app_fxml.fxml")); //Group node that is root
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/app_fxml.fxml")); //Group node that is root
         Parent root = loader.load();
         controller = loader.getController();
         controller.update_info();

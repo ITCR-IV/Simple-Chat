@@ -1,6 +1,8 @@
 package cr.ac.itcr.chat.communication;
 
 import cr.ac.itcr.chat.GUI.App;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -14,6 +16,7 @@ import java.net.UnknownHostException;
 public class Contact {
     private InetAddress ip;
     private int port;
+    private static final Logger log = LoggerFactory.getLogger(Contact.class);
 
     // TODO: 9/20/2020 add ip/port validation maybe?
 
@@ -82,6 +85,7 @@ public class Contact {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            log.error("Failed to connect to given ip/port combination", e);
             System.out.println("Failed to connect to given ip/port combination");
             System.out.println(e.getMessage());
         }
@@ -99,9 +103,11 @@ public class Contact {
             s.close();
             return true;
         } catch (UnknownHostException e) {
+            log.error("{}", e.getMessage(), e);
             e.printStackTrace();
             return false;
         } catch (IOException e) {
+            log.error("Failed to connect to given ip/port combination", e);
             System.out.println("Failed to connect to given ip/port combination");
             System.out.println(e.getMessage());
             return false;

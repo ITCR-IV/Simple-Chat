@@ -54,11 +54,11 @@ public class Receiver implements Runnable {
                     String incomingMsg = dis.readUTF(); // reads the incoming msg
 
                     String[] contactInfo = incomingMsg.split("-", 2)[0].split(":");
-                    Contact sender = new Contact(InetAddress.getByName(contactInfo[0]), Integer.parseInt(contactInfo[1]));
+                    final Contact sender = new Contact(InetAddress.getByName(contactInfo[0]), Integer.parseInt(contactInfo[1]));
                     App.addContact(sender); //Adds the contact to the DB
 
                     String messagePayload = incomingMsg.split("-", 2)[1];
-                    ChatMessage objectMsg = new ChatMessage(sender, messagePayload);
+                    final ChatMessage objectMsg = new ChatMessage(sender, messagePayload);
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {

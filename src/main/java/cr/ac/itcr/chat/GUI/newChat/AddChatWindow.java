@@ -26,7 +26,7 @@ public class AddChatWindow extends App {
         stage.setTitle("Add Contact");
 
         //setup loader and send parent controller to controller
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("addChat.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addChat.fxml"));
         Parent root = loader.load();
         AddChatController controller = loader.getController();
 
